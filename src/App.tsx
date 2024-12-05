@@ -18,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <h1 className="text-4xl font-bold text-blue-300">Hello, Tailwind CSS!</h1>
       </header>
     </div>
   );
