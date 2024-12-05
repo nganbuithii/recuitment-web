@@ -23,11 +23,11 @@ const LoginForm: React.FC = () => {
                 </select>
             </div>
 
-            <InputField id="email" type="email"
+            <InputField id="email" type="email" className="mb-2"
                 label="Email" placeholder="Tên đăng nhập" required
             />
 
-            <InputField id="password" type="password"
+            <InputField id="password" type="password" className="mb-2"
                 label="Mật khẩu" placeholder="Nhập mật khẩu" required />
 
             <div className="flex items-center justify-between w-full mb-3">
@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
                         Ghi nhớ mật khẩu
                     </label>
                 </div>
-                <a href="#"
+                <a href="/forget-pass"
                     className="text-sm text-orange-600 hover:underline focus:outline-none underline underline-offset-1"
                 >
                     Quên mật khẩu?
