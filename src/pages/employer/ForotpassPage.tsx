@@ -1,6 +1,6 @@
 import React from 'react';
 import ForgotPassForm from '../../components/employer/forgotPassForm';
-import Header from '../../components/header';
+import Header from '../../components/employer/header';
 
 const ForgotPassPage = () => {
     return (

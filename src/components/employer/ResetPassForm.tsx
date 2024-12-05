@@ -12,7 +12,7 @@ const ResetPassForm: React.FC = () => {
 
     return (
         <div className="flex flex-col items-start w-full max-w-[524px] mx-auto p-6">
-            <h1 className="text-3xl font-semibold text-left text-[#F26D21] mb-1 w-full tracking-tighter">
+            <h1 className="text-3xl font-semibold text-left text-[#F26D21] mb-12 w-full tracking-tighter">
                 Tạo lại mật khẩu
             </h1>
 

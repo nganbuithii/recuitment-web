@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/header';
-import ResetPassForm from '../../components/employer/ResetPassPage';
+import Header from '../../components/employer/header';
+import ResetPassForm from '../../components/employer/ResetPassForm';
 
 const ResetPassPage = () => {
     return (
