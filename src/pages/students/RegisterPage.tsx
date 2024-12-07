@@ -31,7 +31,7 @@ const RegisterPage = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
-            <div>
+            <div >
                 <InfoRegisterForm />
             </div>
 

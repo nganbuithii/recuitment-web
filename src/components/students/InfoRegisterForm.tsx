@@ -6,16 +6,16 @@ import Button from "../common/Button";
 
 const InfoRegisterForm: React.FC = () => {
     return (
-        <div className="bg-gray-100 min-h-screen flex justify-center items-center">
-            <div className=" rounded-xl  w-full max-w-5xl p-10">
-                <h1 className="text-[#F26D21] text-left font-roboto text-2xl font-bold uppercase mb-3">
+        <div className="bg-gray-100  flex justify-center items-center">
+            <div className=" rounded-xl  w-[343px] sm:w-[1270px]">
+                <h1 className="text-[#F26D21] text-left font-roboto  text-2xl sm:text-[32px] font-bold uppercase mb-3 pt-8">
                     Điền thông tin đăng ký
                 </h1>
 
                 <form >
                     {/* Khu vực tải file */}
-                    <div className="w-full md:w-[50%] flex flex-col mb-5">
-                        <label className="text-sm font-medium text-gray-700">
+                    <div className="w-[50%] sm:w-[50%] flex flex-col mb-5">
+                        <label className=" text-sm sm:text-base font-medium text-gray-700">
                             Chọn file <span className="text-orange-600">*</span>
                         </label>
                         <div className="flex items-center mt-2">
@@ -23,7 +23,7 @@ const InfoRegisterForm: React.FC = () => {
                                 <UploadIcon className="mb-4" />
                                 <button
                                     type="button"
-                                    className="bg-[#F26D21] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#e05c1a]"
+                                    className="bg-[#F26D21] text-white text-xs  sm:text-base px-4 py-2 rounded-lg font-medium hover:bg-[#e05c1a]"
                                 >
                                     Chọn file
                                 </button>
@@ -35,7 +35,7 @@ const InfoRegisterForm: React.FC = () => {
                     </div>
 
 
-                    <div className="flex flex-wrap gap-x-8 gap-y-4">
+                    <div className="flex flex-wrap gap-x-12 gap-y-4">
                         <div className="w-full md:w-[48%]">
                             <InputField
                                 id="fullName"
@@ -62,7 +62,7 @@ const InfoRegisterForm: React.FC = () => {
 
                         {/* Ngày sinh */}
                         <div className="w-full md:w-[48%]">
-                            <label className="block text-sm font-medium text-gray-700">
+                            <label className="block text-base font-medium text-gray-700">
                                 Ngày sinh <span className="text-orange-600">*</span>
                             </label>
                             <div className="relative mt-2">
@@ -131,9 +131,9 @@ const InfoRegisterForm: React.FC = () => {
                             />
                         </div>
                     </div>
-                    <p className="py-2 text-xs text-[#6D6D6D]"> <span className="text-orange-500">*</span> là những trường thông tin bắt buộc</p>
-                    <div className="w-full flex justify-center mt-4">
-                    <Button text="Đăng nhập" icon={<SendIcon/>}/>
+                    <p className="py-2 text-[13px] text-[#6D6D6D]"> <span className="text-orange-500">*</span> là những trường thông tin bắt buộc</p>
+                    <div className="w-[130px] sm:w-[140px] flex justify-center mt-4">
+                    <Button text="Gửi" icon={<SendIcon/>}/>
 
                     </div>
                 </form>
