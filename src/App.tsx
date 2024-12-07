@@ -10,9 +10,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/nha-doanh-nghiep/login" element={<LoginPage />} />
-        <Route path="/nha-doanh-nghiep/forgot-pass" element={<ForgotPassPage/>} />
-        <Route path="/nha-doanh-nghiep/reset-pass" element={<ResetPassPage/>} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot-pass" element={<ForgotPassPage/>} />
+        <Route path="/reset-pass" element={<ResetPassPage/>} />
 
         <Route path="/" element={<HomePage/>} />
         <Route path="/register" element={<RegisterPage/>} />

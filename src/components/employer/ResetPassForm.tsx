@@ -11,18 +11,19 @@ const ResetPassForm: React.FC = () => {
     const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(prev => !prev);
 
     return (
-        <div className="flex flex-col items-start w-full max-w-[524px] mx-auto p-6">
-            <h1 className="text-3xl font-semibold text-left text-[#F26D21] mb-12 w-full tracking-tighter">
+        <div className="flex flex-col items-start w-[600px] mx-auto ">
+            <h1 className="text-[36px] font-semibold text-left text-[#F26D21] mb-12 w-full tracking-tighter">
                 Tạo lại mật khẩu
             </h1>
 
             <InputField
                 id="password"
                 type={showPassword ? "text" : "password"} 
-                className="mb-2"
+                className="mb-2 "
                 label="Mật khẩu"
                 placeholder="Nhập mật khẩu"
                 required
+                noBorder={true}
                 icon={
                     <span
                         onClick={togglePasswordVisibility}
@@ -39,6 +40,7 @@ const ResetPassForm: React.FC = () => {
                 label="Mật khẩu"
                 placeholder="Nhập lại mật khẩu"
                 required
+                noBorder={true}
                 icon={
                     <span
                         onClick={toggleConfirmPasswordVisibility}
@@ -50,8 +52,8 @@ const ResetPassForm: React.FC = () => {
             />
             <Button text="Xác nhận" />
             <a
-                href="/nha-doanh-nghiep/login"
-                className="text-sm text-orange-600 hover:underline focus:outline-none underline underline-offset-1 text-right w-full mt-3"
+                href="/login"
+                className="text-base text-orange-600 hover:underline focus:outline-none underline underline-offset-1 text-right w-full mt-3"
             >
                 Quay lại đăng nhập
             </a>

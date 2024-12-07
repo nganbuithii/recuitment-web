@@ -5,21 +5,22 @@ import Button from "../common/Button";
 
 const LoginForm: React.FC = () => {
     return (
-        <div className="flex flex-col items-center w-full max-w-[524px] mx-auto p-6">
-            <h1 className="text-3xl font-semibold text-left text-[#F26D21] mb-6 w-full tracking-tighter">
+        <div className="flex flex-col items-center w-[600px] mx-auto ">
+            <h1 className="text-[36px] font-semibold text-left text-[#F26D21] mb-6 w-full tracking-tighter">
                 Đăng nhập
             </h1>
 
             <div className="w-full mb-2">
                 <label htmlFor="role"
-                    className="block text-sm font-medium text-gray-700 mb-1 text-left"
+                    className="block text-base font-medium text-gray-700 mb-1 text-left"
                 >
                     Vai trò <span className="text-red-500">*</span>
                 </label>
                 <select id="role" name="role"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 >
-                    <option value="Option 1" className="text-xs">Option 1</option>
+                    <option value="Option 1" className="text-sm">Doanh nghiệp</option>
+                    <option value="Option 1" className="text-sm">Sinh viên</option>
                 </select>
             </div>
 
@@ -37,12 +38,12 @@ const LoginForm: React.FC = () => {
                         id="remember"
                         className="mr-2 rounded border-orange-700 focus:ring-orange-500"
                     />
-                    <label htmlFor="remember" className="text-sm text-gray-700">
+                    <label htmlFor="remember" className="text-base text-gray-700">
                         Ghi nhớ mật khẩu
                     </label>
                 </div>
-                <a href="/forget-pass"
-                    className="text-sm text-orange-600 hover:underline focus:outline-none underline underline-offset-1"
+                <a href="/forgot-pass"
+                    className="text-base text-orange-600 hover:underline focus:outline-none underline underline-offset-1"
                 >
                     Quên mật khẩu?
                 </a>

@@ -25,7 +25,7 @@ const InputField: React.FC<InputFieldProps> = ({ id, type, label, placeholder, r
                     type={type}
                     id={id}
                     placeholder={placeholder}
-                    className={`w-full px-3 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 pr-10 
+                    className={`w-full px-3 py-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 pr-10 
                         ${noBorder ? 'border-none' : 'border border-gray-300'}`} // Kiểm tra noBorder
                 />
                 {icon && (
