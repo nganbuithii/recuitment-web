@@ -4,6 +4,7 @@ import LoginPage from './pages/employer/LoginPage';
 import ForgotPassPage from './pages/employer/ForotpassPage';
 import ResetPassPage from './pages/employer/ResetPassPage';
 import HomePage from './pages/students/HomePage';
+import RegisterPage from './pages/students/RegisterPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/nha-doanh-nghiep/reset-pass" element={<ResetPassPage/>} />
 
         <Route path="/" element={<HomePage/>} />
+        <Route path="/register" element={<RegisterPage/>} />
 
 
       </Routes>

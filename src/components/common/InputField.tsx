@@ -8,9 +8,10 @@ interface InputFieldProps {
     required?: boolean;
     className?: string; 
     icon?: React.ReactNode;  
+    noBorder?: boolean; 
 }
 
-const InputField: React.FC<InputFieldProps> = ({ id, type, label, placeholder, required, className, icon }) => {
+const InputField: React.FC<InputFieldProps> = ({ id, type, label, placeholder, required, className, icon, noBorder }) => {
     return (
         <div className={`w-full ${className}`}>
             <label
@@ -24,7 +25,8 @@ const InputField: React.FC<InputFieldProps> = ({ id, type, label, placeholder, r
                     type={type}
                     id={id}
                     placeholder={placeholder}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 pr-10" 
+                    className={`w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 pr-10 
+                        ${noBorder ? 'border-none' : 'border border-gray-300'}`} // Kiểm tra noBorder
                 />
                 {icon && (
                     <span className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer">

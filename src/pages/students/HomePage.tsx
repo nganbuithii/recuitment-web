@@ -6,14 +6,14 @@ import JobCard from '../../components/common/JobCard';
 
 const HomePage = () => {
     return (
-        <div className=" min-h-screen flex flex-col bg-white">
+        <div className=" max-h-screen-xl flex flex-col bg-white ">
             <Header />
             <section className='bg-gray-100'>
-                <div className=" w-[1000px]  mx-auto">
+                <div className="w-[343px] sm:w-[1290px] sm:h-[1080px] mx-auto">
                     <SearchBar />
 
-                    <div className="flex justify-center items-center w-full bg-gray-100 ">
-                        <h1 className="text-black text-center font-roboto text-2xl font-bold leading-[130%] uppercase w-1/2">
+                    <div className="flex justify-center items-center w-full bg-gray-100 my-6 ">
+                        <h1 className="text-black text-center font-roboto  text-2xl sm:text-[32px] font-bold leading-[130%] uppercase w-full sm:w-1/2 ">
                             TÌM
                             <span className="text-orange-500"> CÔNG VIỆC MƠ ƯỚC </span>
                             CỦA BẠN TẠI NGÔI NHÀ MỚI
@@ -32,6 +32,27 @@ const HomePage = () => {
                         <JobCard
                             title="Thiết Kế UI/UX (Figma)"
                             company="Alta Plastic"
+                            requirements="Có tối thiểu 1 năm kinh nghiệm ReactJS, TypeScript"
+                            email="tuyendung@alta.com.vn"
+                            phone="0282 240 9960"
+                        />
+                        <JobCard
+                            title="Thiết Kế UI/UX (Figma)"
+                            company="Unigons"
+                            requirements="Có tối thiểu 1 năm kinh nghiệm ReactJS, TypeScript"
+                            email="tuyendung@alta.com.vn"
+                            phone="0282 240 9960"
+                        />
+                        <JobCard
+                            title="Thiết Kế UI/UX (Figma)"
+                            company="Unigons"
+                            requirements="Có tối thiểu 1 năm kinh nghiệm ReactJS, TypeScript"
+                            email="tuyendung@alta.com.vn"
+                            phone="0282 240 9960"
+                        />
+                        <JobCard
+                            title="Thiết Kế UI/UX (Figma)"
+                            company="Unigons"
                             requirements="Có tối thiểu 1 năm kinh nghiệm ReactJS, TypeScript"
                             email="tuyendung@alta.com.vn"
                             phone="0282 240 9960"

@@ -17,7 +17,7 @@ const JobCard: React.FC<JobCardProps> = ({
     phone,
 }) => {
     return (
-        <div className="w-[370px] flex flex-col border border-gray-300 rounded-lg shadow-md p-4 bg-white">
+        <div className="w-[414px] flex flex-col border border-gray-300 rounded-lg shadow-md p-4 bg-white">
             {/* Title and Company */}
             <div className="flex justify-between items-center">
                 <div>
@@ -34,18 +34,18 @@ const JobCard: React.FC<JobCardProps> = ({
 
             {/* Requirements */}
             <p className="mt-3 text-sm text-gray-700 w-[80%]">
-                <span className="text-sm">Yêu cầu:</span> {requirements}
+                <span className="text-[14px]">Yêu cầu:</span> {requirements}
             </p>
 
             {/* Contact Info */}
             <div className="mt-4 flex items-center justify-between text-sm text-gray-600 ">
-                <div className="flex items-center gap-2 border-r pr-3 border-cyan-900 ">
+                <div className="flex items-center gap-2 border-r pr-3 sm:pr-10 border-cyan-900 ">
                     <EmailIcon />
-                    <span className="text-sm">{email}</span>
+                    <span className=" text-[13px] sm:text-sm">{email}</span>
                 </div>
-                <div className="pl-3 flex items-center gap-2">
+                <div className=" flex items-center gap-2">
                     <PhoneIcon />
-                    <span className="text-sm">{phone}</span>
+                    <span className="text-[13px] sm:text-sm">{phone}</span>
                 </div>
             </div>
         </div>
