@@ -4,22 +4,26 @@ import LoginPage from './pages/employer/LoginPage';
 import ForgotPassPage from './pages/employer/ForotpassPage';
 import ResetPassPage from './pages/employer/ResetPassPage';
 import HomePage from './pages/students/HomePage';
-import RegisterPage from './pages/students/RegisterPage';
+import store from './store/store';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/forgot-pass" element={<ForgotPassPage/>} />
-        <Route path="/reset-pass" element={<ResetPassPage/>} />
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-pass" element={<ForgotPassPage />} />
+          <Route path="/reset-pass" element={<ResetPassPage />} />
 
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/register" element={<RegisterPage/>} />
+          <Route path="/" element={<HomePage />} />
 
 
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
+      <ToastContainer />
+    </Provider>
   );
 }
 

@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { NoteIcon, UserIcon } from "../common/Icons";
-
-const Header = () => {
+interface HeaderProps {
+    onSelect: (section: "jd" | "register") => void;
+}
+const Header: React.FC<HeaderProps> = ({ onSelect }) => {
     const [menuOpen, setMenuOpen] = useState(false); // State để điều khiển menu toggle
     const [selected, setSelected] = useState<"jd" | "register" | null>("jd");
 
     const handleJDClick = () => {
         setSelected(selected === "jd" ? null : "jd");
+        onSelect("jd");
     };
 
     const handleRegisterClick = () => {
         setSelected(selected === "register" ? null : "register");
+        onSelect("register"); 
     };
 
     const toggleMenu = () => {
@@ -43,7 +47,7 @@ const Header = () => {
             >
                 {/* Xem JD yêu cầu tuyển dụng */}
                 <div
-                    className="flex flex-col items-center cursor-pointer"
+                    className="flex flex-col items-center cursor-pointer relative"
                     onClick={handleJDClick}
                 >
                     <div
@@ -55,13 +59,13 @@ const Header = () => {
                         <p className="text-sm sm:text-lg font-medium ">Xem JD yêu cầu tuyển dụng</p>
                     </div>
                     {selected === "jd" && (
-                        <div className="w-2 h-2 rounded-full bg-[#F26D21] mt-1 sm:block hidden"></div>
+                        <div className="w-2 h-2 rounded-full bg-[#F26D21] mt-1 sm:block hidden absolute bottom-[-12px]"></div>
                     )}
                 </div>
 
                 {/* Đăng ký tuyển dụng */}
                 <div
-                    className="flex flex-col items-center cursor-pointer"
+                    className="flex flex-col items-center cursor-pointer relative"
                     onClick={handleRegisterClick}
                 >
                     <div
@@ -73,7 +77,7 @@ const Header = () => {
                         <p className="text-sm sm:text-lg font-medium text-center">Đăng ký trực tuyến</p>
                     </div>
                     {selected === "register" && (
-                        <div className="w-2 h-2 rounded-full bg-[#F26D21] mt-1 sm:block hidden"></div>
+                        <div className="w-2 h-2 rounded-full bg-[#F26D21] mt-1 sm:block hidden absolute bottom-[-12px]"></div>
                     )}
                 </div>
             </div>

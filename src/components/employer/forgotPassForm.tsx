@@ -11,10 +11,10 @@ const forgotPassForm: React.FC = () => {
             <p className="max-w-[360px] text-left text-base w-full mb-12">
                 Vui lòng nhập địa chỉ email đã đăng kí để yêu cầu khôi phục lại mật khẩu
             </p>
-
+{/* 
             <InputField id="email" type="email" className="mb-4"
                 label="Email" placeholder="Tên đăng nhập" required
-            />
+            /> */}
 
             <Button text="Xác nhận" />
             <a href="/login"

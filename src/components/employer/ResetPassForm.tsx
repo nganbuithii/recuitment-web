@@ -15,7 +15,7 @@ const ResetPassForm: React.FC = () => {
             <h1 className="text-[36px] font-semibold text-left text-[#F26D21] mb-12 w-full tracking-tighter">
                 Tạo lại mật khẩu
             </h1>
-
+{/* 
             <InputField
                 id="password"
                 type={showPassword ? "text" : "password"} 
@@ -32,8 +32,8 @@ const ResetPassForm: React.FC = () => {
                         {showPassword ? <FaEye /> : <FaEyeSlash color="gray" />} 
                     </span>
                 }
-            />
-            <InputField
+            /> */}
+            {/* <InputField
                 id="confirm-password"
                 type={showConfirmPassword ? "text" : "password"}
                 className="mb-4"
@@ -49,7 +49,7 @@ const ResetPassForm: React.FC = () => {
                         {showConfirmPassword ? <FaEye /> : <FaEyeSlash color="gray" />}
                     </span>
                 }
-            />
+            /> */}
             <Button text="Xác nhận" />
             <a
                 href="/login"
