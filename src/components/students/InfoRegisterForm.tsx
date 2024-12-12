@@ -36,7 +36,7 @@ const InfoRegisterForm: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const [formErrors, setFormErrors] = useState<any>({});
-    const { loading, error } = useSelector((state: RootState) => state.students);
+    const { loading } = useSelector((state: RootState) => state.students);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -181,7 +181,7 @@ const InfoRegisterForm: React.FC = () => {
                                 </div>
                                 <input
                                     type="date"
-                                    className={`block w-full pl-10 pr-10 rounded-lg bg-white px-4 py-4 shadow-sm focus:border-orange-500 focus:ring-orange-500 border ${formErrors.birthDate == true ? 'border-red-500' : 'border-white'}`}
+                                    className={`block w-full pl-10 pr-10 rounded-lg bg-white px-4 py-4 shadow-sm focus:border-orange-500 focus:ring-orange-500 border ${formErrors.birthDate ? 'border-red-500' : 'border-white'}`}
                                     placeholder="dd/mm/yyyy"
                                     value={formData.birthDate}
                                     onChange={handleChange}

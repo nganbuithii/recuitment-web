@@ -4,7 +4,7 @@ import Header from '../../components/employer/header';
 
 const ForgotPassPage = () => {
     return (
-        <div className="  flex flex-col bg-white">
+        <div className="  flex flex-col bg-gray-100 min-h-screen">
             <Header title="HỆ THỐNG TUYỂN DỤNG" subtitle='VÀ QUẢN LÝ SINH VIÊN THỰC TẬP'/>
 
             <div className="flex justify-center items-center flex-grow gap-8 px-4 mt-32 ">
