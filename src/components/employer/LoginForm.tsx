@@ -2,20 +2,26 @@ import React, { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import InputField from "../common/InputField";
 import Button from "../common/Button";
-import SelectField from "../common/SelectField";
 import { AlertIcon, DropIcon } from "../common/Icons";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebaseConfig";
+import { auth, db } from "../../services/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/authSlide";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const LoginForm: React.FC = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
+        role: "DOANH_NGHIEP",
     });
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const recaptchaRef = useRef<any>(null);
-    const [recaptchaError, setRecaptchaError] = useState<string | null>(null); 
+    const [recaptchaError, setRecaptchaError] = useState<string | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -23,26 +29,59 @@ const LoginForm: React.FC = () => {
     };
 
     const handleLogin = async () => {
-        setLoading(true);
+        setError(null);
         const recaptchaValue = recaptchaRef.current.getValue();
-        
-        if (!recaptchaValue) {
-            setRecaptchaError('Vui lòng xác nhận reCAPTCHA.'); 
-            setLoading(false);
-            return;
-        }
-
-        setRecaptchaError(null);
+        if (!recaptchaValue) return setError("Vui lòng xác nhận reCAPTCHA.");
+    
         try {
+            setLoading(true); 
             const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
-            console.log('Đăng nhập thành công', userCredential.user);
-        } catch (error) {
-            setError('Sai tên đăng nhập hoặc mật khẩu.');
-            console.error('Error logging in: ', error);
+            const user = userCredential.user;
+    
+            if (user.email) {
+                const q = query(collection(db, "students"), where("email", "==", user.email));
+                const querySnapshot = await getDocs(q);
+            
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((doc) => {
+                        const userData = doc.data();
+            
+                        if (userData && userData.email && userData.role) {
+                            dispatch(setUser({
+                                uid: user.uid,
+                                email: user.email as string, 
+                                role: userData.role,
+                                displayName: userData.displayName,
+                                ...userData,
+                            }));
+            
+                            if (userData.role === "STUDENT") {
+                                navigate("/student-dashboard");
+                            } else {
+                                navigate("/");
+                            }
+                        } else {
+                            setError("Thông tin người dùng không hợp lệ.");
+                        }
+                    });
+                } else {
+                    setError("Không tìm thấy người dùng với email này.");
+                }
+            } else {
+                setError("Email không hợp lệ.");
+            }
+            
+    
+        } catch (err) {
+            setError("Sai tên đăng nhập hoặc mật khẩu.");
+            console.error(err);
         } finally {
-            setLoading(false);
+            setLoading(false); 
         }
     };
+    
+
+
 
     return (
         <div className="flex flex-col items-center w-[600px] mx-auto">
@@ -50,7 +89,6 @@ const LoginForm: React.FC = () => {
                 Đăng nhập
             </h1>
 
-            {/* Role selection */}
             <div className="w-full mb-2 relative">
                 <label htmlFor="role" className="block text-base font-medium text-gray-700 mb-1 text-left">
                     Vai trò <span className="text-red-500">*</span>
@@ -58,16 +96,17 @@ const LoginForm: React.FC = () => {
                 <select
                     id="role"
                     name="role"
+                    value={formData.role}
+                    onChange={handleChange}
                     className={`w-full px-3 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 appearance-none pr-10
             ${error ? 'border-red-500' : 'border-gray-300'}`}
                 >
-                    <option value="Option 1" className="text-sm">Doanh nghiệp</option>
-                    <option value="Option 2" className="text-sm">Sinh viên</option>
+                    <option value="DOANH_NGHIEP" className="text-sm">Doanh nghiệp</option>
+                    <option value="STUDENT" className="text-sm">Sinh viên</option>
                 </select>
                 <DropIcon className="absolute right-3 top-[70%] transform -translate-y-[50%] pointer-events-none" />
             </div>
 
-            {/* Email Input */}
             <InputField
                 id="email"
                 type="email"
@@ -81,7 +120,6 @@ const LoginForm: React.FC = () => {
                 error={!!error}
             />
 
-            {/* Password Input */}
             <InputField
                 id="password"
                 type="password"
@@ -121,7 +159,6 @@ const LoginForm: React.FC = () => {
             </div>
 
 
-            {/* reCAPTCHA */}
             {recaptchaError && (
                 <div className="text-red-500 text-base text-left mb-2 flex justify-start w-full">
                     <AlertIcon />
@@ -135,7 +172,6 @@ const LoginForm: React.FC = () => {
                 />
             </div>
 
-            {/* Login Button */}
             <Button text="Đăng nhập" onClick={handleLogin} />
         </div>
     );

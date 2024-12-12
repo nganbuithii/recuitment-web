@@ -7,6 +7,8 @@ import { createStudent, Student } from "../../store/studentsSlice";
 import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/firebaseConfig";
 interface FormData {
     fullName: string;
     school: string;
@@ -18,6 +20,7 @@ interface FormData {
     phone: string;
     role: string;
     file: string | File;
+    password:string,
 }
 
 const InfoRegisterForm: React.FC = () => {
@@ -30,6 +33,7 @@ const InfoRegisterForm: React.FC = () => {
         registerType: "Developer",
         email: "",
         phone: "",
+        password:"",
         role: "STUDENT",
         file: "" as File | string,
     });
@@ -46,7 +50,7 @@ const InfoRegisterForm: React.FC = () => {
     const validate = () => {
         const errors: any = {};
         const requiredFields: (keyof FormData)[] = [
-            "fullName", "school", "birthDate", "major", "position", "registerType", "email", "phone", "file"
+            "fullName", "school", "birthDate", "major", "position", "registerType", "email", "phone", "file","password"
         ];
 
         // Kiểm tra các trường bắt buộc
@@ -55,6 +59,11 @@ const InfoRegisterForm: React.FC = () => {
                 errors[field] = true;
             }
         });
+        
+ // Kiểm tra độ dài mật khẩu
+ if (formData.password.length < 6) {
+    errors.password = "Mật khẩu phải có ít nhất 6 ký tự";
+}
 
         return Object.keys(errors).length === 0 ? null : errors;
     };
@@ -75,24 +84,36 @@ const InfoRegisterForm: React.FC = () => {
         e.preventDefault();
         const errors = validate();
         if (errors) {
-            console.log("errors", errors)
+            console.log("errors", errors);
             setFormErrors(errors);
             return;
         }
-
-        const { file, ...otherFields } = formData;
-        const studentData: Student & { file?: File } = {
-            ...otherFields,
-            file: file instanceof File ? file : undefined,
-        };
-
-        const result = await dispatch(createStudent(studentData));
-
-        if (createStudent.fulfilled.match(result)) {
-            navigate("/login");
+    
+        const { file, email, password, ...otherFields } = formData;
+    
+        try {
+            // Tạo tài khoản Firebase Authentication
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            console.log("Firebase User Created:", userCredential.user);
+    
+            // Sau khi tạo tài khoản thành công, lưu thông tin Student
+            const studentData: Student & { file?: File } = {
+                ...otherFields,
+                email,
+                password,
+                file: file instanceof File ? file : undefined,
+            };
+            
+            const result = await dispatch(createStudent(studentData));
+            if (createStudent.fulfilled.match(result)) {
+                navigate("/login");
+            }
+        } catch (error) {
+            console.error("Error creating Firebase user:", error);
+            // Xử lý lỗi (ví dụ: thông báo người dùng)
         }
     };
-
+    
 
     return (
         <div className="bg-gray-100  flex justify-center items-center pb-10">
@@ -152,6 +173,22 @@ const InfoRegisterForm: React.FC = () => {
                                 error={formErrors.fullName}
                             />
                             {formErrors.fullName && <p className="text-red-500 text-sm">{formErrors.fullName}</p>}
+
+                        </div>
+                        <div className="w-full md:w-[48%]">
+                            <InputField
+                                id="password"
+                                name="password"
+                                type="password"
+                                label="Mật khẩu"
+                                placeholder="Nhập mật khẩu"
+                                required
+                                // noBorder={true}
+                                value={formData.password}
+                                onChange={handleChange}
+                                error={formErrors.password}
+                            />
+                            {formErrors.password && <p className="text-red-500 text-sm">{formErrors.password}</p>}
 
                         </div>
 

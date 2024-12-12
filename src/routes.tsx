@@ -4,6 +4,7 @@ import ForgotPassPage from "./pages/employer/ForotpassPage";
 import HomePage from "./pages/students/HomePage";
 import ErrorPage from "./pages/errorPage";
 import ResetPassPage from "./pages/employer/ResetPassPage";
+import StudentDashboard from "./pages/students/StudentDashboard";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <HomePage />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/student-dashboard",
+        element: <StudentDashboard />,
         errorElement: <ErrorPage />,
     },
 ]);

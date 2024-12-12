@@ -14,6 +14,7 @@ export interface Student {
     phone: string;
     role:string;
     fileUrl?: string; 
+    password:string;
 }
 
 interface StudentsState {
