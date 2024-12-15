@@ -2,7 +2,7 @@ import React from "react";
 import { RecIcon } from "./Icons";
 
 interface SelectFieldProps {
-    label: string;
+    label?: string;
     options: string[];
     required?: boolean;
     value: string;
@@ -12,9 +12,10 @@ interface SelectFieldProps {
 
 const SelectField: React.FC<SelectFieldProps> = ({ label, options, required, value, onChange, name }) => {
     return (
-        <div className="w-full md:w-[48%]">
+        <div className="w-full md:w-[100%]">
             <label className="block text-sm font-medium text-gray-700">
-                {label} {required && <span className="text-orange-600">*</span>}
+                {label} 
+                {/* {required && <span className="text-orange-600">*</span>} */}
             </label>
             <div className="relative mt-2">
                 <select

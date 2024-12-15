@@ -1,0 +1,258 @@
+{
+    "subjects": [
+      {
+        "id": "backend",
+        "name": "Lập trình Back-end",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Câu hỏi 1 của Back-end?",
+            "options": ["A. Integer", "B. Letter", "C. Character", "D. Number"],
+            "correctAnswer": "A. Integer"
+          },
+          {
+            "id": 2,
+            "question": "Câu hỏi 2 của Back-end?",
+            "options": ["A. Letter", "B. Number", "C. Integer", "D. Character"],
+            "correctAnswer": "B. Number"
+          },
+          {
+            "id": 3,
+            "question": "Câu hỏi 3 của Back-end?",
+            "options": ["A. Method", "B. Function", "C. Array", "D. Class"],
+            "correctAnswer": "B. Function"
+          },
+          {
+            "id": 4,
+            "question": "Câu hỏi 4 của Back-end?",
+            "options": ["A. HTTP", "B. HTTPS", "C. FTP", "D. TCP"],
+            "correctAnswer": "C. FTP"
+          },
+          {
+            "id": 5,
+            "question": "Câu hỏi 5 của Back-end?",
+            "options": ["A. Java", "B. C#", "C. Python", "D. Ruby"],
+            "correctAnswer": "B. C#"
+          },
+          {
+            "id": 6,
+            "question": "Câu hỏi 6 của Back-end?",
+            "options": ["A. Backend", "B. Frontend", "C. API", "D. Database"],
+            "correctAnswer": "C. API"
+          },
+          {
+            "id": 7,
+            "question": "Câu hỏi 7 của Back-end?",
+            "options": ["A. GET", "B. POST", "C. PUT", "D. DELETE"],
+            "correctAnswer": "A. GET"
+          },
+          {
+            "id": 8,
+            "question": "Câu hỏi 8 của Back-end?",
+            "options": ["A. MongoDB", "B. MySQL", "C. SQLite", "D. PostgreSQL"],
+            "correctAnswer": "B. MySQL"
+          },
+          {
+            "id": 9,
+            "question": "Câu hỏi 9 của Back-end?",
+            "options": ["A. JSON", "B. XML", "C. CSV", "D. YAML"],
+            "correctAnswer": "A. JSON"
+          },
+          {
+            "id": 10,
+            "question": "Câu hỏi 10 của Back-end?",
+            "options": ["A. TCP", "B. IP", "C. UDP", "D. ICMP"],
+            "correctAnswer": "C. UDP"
+          },
+          {
+            "id": 11,
+            "question": "Câu hỏi 11 của Back-end?",
+            "options": ["A. Singleton", "B. Factory", "C. Adapter", "D. Proxy"],
+            "correctAnswer": "A. Singleton"
+          },
+          {
+            "id": 12,
+            "question": "Câu hỏi 12 của Back-end?",
+            "options": ["A. Git", "B. Docker", "C. Jenkins", "D. Kubernetes"],
+            "correctAnswer": "B. Docker"
+          },
+          {
+            "id": 13,
+            "question": "Câu hỏi 13 của Back-end?",
+            "options": ["A. REST", "B. GraphQL", "C. SOAP", "D. WSDL"],
+            "correctAnswer": "A. REST"
+          },
+          {
+            "id": 14,
+            "question": "Câu hỏi 14 của Back-end?",
+            "options": ["A. PHP", "B. ASP.NET", "C. Node.js", "D. Flask"],
+            "correctAnswer": "C. Node.js"
+          },
+          {
+            "id": 15,
+            "question": "Câu hỏi 15 của Back-end?",
+            "options": ["A. Compilation", "B. Interpretation", "C. Debugging", "D. Deployment"],
+            "correctAnswer": "D. Deployment"
+          },
+          {
+            "id": 16,
+            "question": "Câu hỏi 16 của Back-end?",
+            "options": ["A. Hashing", "B. Encryption", "C. Compression", "D. Encoding"],
+            "correctAnswer": "B. Encryption"
+          },
+          {
+            "id": 17,
+            "question": "Câu hỏi 17 của Back-end?",
+            "options": ["A. CRUD", "B. SQL", "C. NoSQL", "D. JOIN"],
+            "correctAnswer": "A. CRUD"
+          },
+          {
+            "id": 18,
+            "question": "Câu hỏi 18 của Back-end?",
+            "options": ["A. Cache", "B. CDN", "C. Proxy", "D. Firewall"],
+            "correctAnswer": "D. Firewall"
+          },
+          {
+            "id": 19,
+            "question": "Câu hỏi 19 của Back-end?",
+            "options": ["A. localhost", "B. 127.0.0.1", "C. ::1", "D. 192.168.1.1"],
+            "correctAnswer": "B. 127.0.0.1"
+          },
+          {
+            "id": 20,
+            "question": "Câu hỏi 20 của Back-end?",
+            "options": ["A. Thread", "B. Process", "C. Deadlock", "D. Semaphore"],
+            "correctAnswer": "C. Deadlock"
+          }
+        ]
+      },
+      {
+        "id": "frontend",
+        "name": "Lập trình Front-end",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Câu hỏi 1 của Front-end?",
+            "options": ["A. HTML", "B. CSS", "C. JavaScript", "D. React"],
+            "correctAnswer": "A. HTML"
+          },
+          {
+            "id": 2,
+            "question": "Câu hỏi 2 của Front-end?",
+            "options": ["A. Flexbox", "B. Grid", "C. Inline", "D. Block"],
+            "correctAnswer": "B. Grid"
+          },
+          {
+            "id": 3,
+            "question": "Câu hỏi 3 của Front end?",
+            "options": ["A. Method", "B. Function", "C. Array", "D. Class"],
+            "correctAnswer": "B. Function"
+          },
+          {
+            "id": 4,
+            "question": "Câu hỏi 4 của Front end?",
+            "options": ["A. HTTP", "B. HTTPS", "C. FTP", "D. TCP"],
+            "correctAnswer": "C. FTP"
+          },
+          {
+            "id": 5,
+            "question": "Câu hỏi 5 của Front end?",
+            "options": ["A. Java", "B. C#", "C. Python", "D. Ruby"],
+            "correctAnswer": "B. C#"
+          },
+          {
+            "id": 6,
+            "question": "Câu hỏi 6 của Front end?",
+            "options": ["A. Backend", "B. Frontend", "C. API", "D. Database"],
+            "correctAnswer": "C. API"
+          },
+          {
+            "id": 7,
+            "question": "Câu hỏi 7 của Front end?",
+            "options": ["A. GET", "B. POST", "C. PUT", "D. DELETE"],
+            "correctAnswer": "A. GET"
+          },
+          {
+            "id": 8,
+            "question": "Câu hỏi 8 của Front end?",
+            "options": ["A. MongoDB", "B. MySQL", "C. SQLite", "D. PostgreSQL"],
+            "correctAnswer": "B. MySQL"
+          },
+          {
+            "id": 9,
+            "question": "Câu hỏi 9 của Front end?",
+            "options": ["A. JSON", "B. XML", "C. CSV", "D. YAML"],
+            "correctAnswer": "A. JSON"
+          },
+          {
+            "id": 10,
+            "question": "Câu hỏi 10 của Front end?",
+            "options": ["A. TCP", "B. IP", "C. UDP", "D. ICMP"],
+            "correctAnswer": "C. UDP"
+          },
+          {
+            "id": 11,
+            "question": "Câu hỏi 11 của Front end?",
+            "options": ["A. Singleton", "B. Factory", "C. Adapter", "D. Proxy"],
+            "correctAnswer": "A. Singleton"
+          },
+          {
+            "id": 12,
+            "question": "Câu hỏi 12 của Front end?",
+            "options": ["A. Git", "B. Docker", "C. Jenkins", "D. Kubernetes"],
+            "correctAnswer": "B. Docker"
+          },
+          {
+            "id": 13,
+            "question": "Câu hỏi 13 của Front end?",
+            "options": ["A. REST", "B. GraphQL", "C. SOAP", "D. WSDL"],
+            "correctAnswer": "A. REST"
+          },
+          {
+            "id": 14,
+            "question": "Câu hỏi 14 của Front end?",
+            "options": ["A. PHP", "B. ASP.NET", "C. Node.js", "D. Flask"],
+            "correctAnswer": "C. Node.js"
+          },
+          {
+            "id": 15,
+            "question": "Câu hỏi 15 của Front end?",
+            "options": ["A. Compilation", "B. Interpretation", "C. Debugging", "D. Deployment"],
+            "correctAnswer": "D. Deployment"
+          },
+          {
+            "id": 16,
+            "question": "Câu hỏi 16 của Front end?",
+            "options": ["A. Hashing", "B. Encryption", "C. Compression", "D. Encoding"],
+            "correctAnswer": "B. Encryption"
+          },
+          {
+            "id": 17,
+            "question": "Câu hỏi 17 của Front end?",
+            "options": ["A. CRUD", "B. SQL", "C. NoSQL", "D. JOIN"],
+            "correctAnswer": "A. CRUD"
+          },
+          {
+            "id": 18,
+            "question": "Câu hỏi 18 của Front end?",
+            "options": ["A. Cache", "B. CDN", "C. Proxy", "D. Firewall"],
+            "correctAnswer": "D. Firewall"
+          },
+          {
+            "id": 19,
+            "question": "Câu hỏi 19 của Front end?",
+            "options": ["A. localhost", "B. 127.0.0.1", "C. ::1", "D. 192.168.1.1"],
+            "correctAnswer": "B. 127.0.0.1"
+          },
+          {
+            "id": 20,
+            "question": "Câu hỏi 20 của Front end?",
+            "options": ["A. Thread", "B. Process", "C. Deadlock", "D. Semaphore"],
+            "correctAnswer": "C. Deadlock"
+          }
+        
+        ]
+      }
+    ]
+  }
+  

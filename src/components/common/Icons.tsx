@@ -97,6 +97,12 @@ export const DropIcon = ({ className }: { className?: string }) => (
         <path d="M17.1464 9.85355L12.3536 14.6464C12.1583 14.8417 11.8417 14.8417 11.6464 14.6464L6.85355 9.85355C6.53857 9.53857 6.76165 9 7.20711 9H16.7929C17.2383 9 17.4614 9.53857 17.1464 9.85355Z" stroke="#F26D21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 );
+export const ArrowIconLeft = ({ className }: { className?: string }) => (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className={`${className}`}>
+<path d="M27 18L9 18M27 18L19.5 25.5M27 18L19.5 10.5" stroke="#F26D21" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+);
 export const AlertIcon = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#EC3740" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

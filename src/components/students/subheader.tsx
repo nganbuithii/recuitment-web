@@ -83,7 +83,7 @@ const SubHeader: React.FC<HeaderProps> = ({ onSelect, userAvatar, userName }) =>
                 </div>
 
                 {/* User Avatar */}
-                <div className="flex space-x-2 bg-bgMain px-4 py-4 rounded-lg">
+                <div className="flex space-x-2 bg-bgMain px-4 py-2 rounded-lg">
                     <img src={userAvatar} alt="avatar" className="h-10 w-10 rounded-full" />
                     <p className="text-white text-xl">{userName}</p>
                 </div>

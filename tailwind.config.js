@@ -8,6 +8,8 @@ module.exports = {
       colors: {
         bgMain: '#F26D21',
         bgPrimary: " #F1F3F5",
+        bgButton:"#F0F0F0",
+        
 
       },
     },
