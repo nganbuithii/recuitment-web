@@ -17,7 +17,7 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({ id, type, label, placeholder, required, className, error, name, icon, noBorder, value, onChange }) => {
     return (
-        <div className={`w-full ${className}`}>
+        <div className={`w-full ${className} `}>
             <label
                 htmlFor={id}
                 className="block text-sm sm:text-base font-medium text-gray-700 mb-1 text-left"
@@ -32,7 +32,7 @@ const InputField: React.FC<InputFieldProps> = ({ id, type, label, placeholder, r
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    className={`w-full px-3 py-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 pr-10 text-black
+                    className={`bg-white w-full px-3 py-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 pr-10 text-black
                         ${noBorder ? 'border-none' : 'border border-gray-300'}
                          ${error ? 'border-red-500' : 'border-white'}`}
                 />

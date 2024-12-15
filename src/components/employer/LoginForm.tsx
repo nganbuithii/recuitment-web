@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/authSlide";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Loading from "../common/Loading";
 
 const LoginForm: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const LoginForm: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const recaptchaRef = useRef<any>(null);
-    const [recaptchaError, setRecaptchaError] = useState<string | null>(null);
+    const [recaptchaError] = useState<string | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -34,27 +35,32 @@ const LoginForm: React.FC = () => {
         if (!recaptchaValue) return setError("Vui lòng xác nhận reCAPTCHA.");
     
         try {
-            setLoading(true); 
+            setLoading(true);
             const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
             const user = userCredential.user;
     
             if (user.email) {
                 const q = query(collection(db, "students"), where("email", "==", user.email));
                 const querySnapshot = await getDocs(q);
-            
+    
                 if (!querySnapshot.empty) {
                     querySnapshot.forEach((doc) => {
                         const userData = doc.data();
-            
+    
+                        if (userData.role !== formData.role) {
+                            setError("Sai tên đăng nhập hoặc mật khẩu.");
+                            return; 
+                        }
+    
                         if (userData && userData.email && userData.role) {
                             dispatch(setUser({
                                 uid: user.uid,
-                                email: user.email as string, 
+                                email: user.email as string,
                                 role: userData.role,
                                 displayName: userData.displayName,
                                 ...userData,
                             }));
-            
+    
                             if (userData.role === "STUDENT") {
                                 navigate("/student-dashboard");
                             } else {
@@ -70,21 +76,21 @@ const LoginForm: React.FC = () => {
             } else {
                 setError("Email không hợp lệ.");
             }
-            
     
         } catch (err) {
             setError("Sai tên đăng nhập hoặc mật khẩu.");
             console.error(err);
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
+    
     
 
 
 
     return (
-        <div className="flex flex-col items-center w-[600px] mx-auto">
+        <div className="flex flex-col items-center w-[600px] mx-auto bg-bgPrimary">
             <h1 className="text-[36px] font-semibold text-left text-[#F26D21] mb-6 w-full tracking-tighter">
                 Đăng nhập
             </h1>
@@ -99,7 +105,7 @@ const LoginForm: React.FC = () => {
                     value={formData.role}
                     onChange={handleChange}
                     className={`w-full px-3 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 appearance-none pr-10
-            ${error ? 'border-red-500' : 'border-gray-300'}`}
+            ${error ? 'border-red-500' : 'border-transparent'}`}
                 >
                     <option value="DOANH_NGHIEP" className="text-sm">Doanh nghiệp</option>
                     <option value="STUDENT" className="text-sm">Sinh viên</option>
@@ -172,7 +178,17 @@ const LoginForm: React.FC = () => {
                 />
             </div>
 
-            <Button text="Đăng nhập" onClick={handleLogin} />
+            <Button
+    text={
+        loading ? (
+            <Loading />
+        ) : (
+            "Đăng nhập"
+        )
+    }
+    onClick={handleLogin}
+    disabled={loading}
+/>
         </div>
     );
 };

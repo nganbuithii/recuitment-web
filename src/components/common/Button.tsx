@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ButtonProps {
-    text: string;
+    text: React.ReactNode;
     icon?: React.ReactNode;
     onClick?: () => void;
     disabled?: boolean;
