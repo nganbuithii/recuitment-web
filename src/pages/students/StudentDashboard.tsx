@@ -8,7 +8,7 @@ import SubHeader from "../../components/students/subheader";
 import SelectField from "../../components/common/SelectField";
 import Popup from "../../components/common/PopUp";
 import QuestionDisplay from "./QuestionDisplay";
-import { useNavigate } from "react-router-dom";
+import ProcessLessonForm from "./ProcessLessonForm";
 
 const StudentDashboard: React.FC = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -18,13 +18,12 @@ const StudentDashboard: React.FC = () => {
     const [questions, setQuestions] = useState<any[]>([]);
     const [showQuestions, setShowQuestions] = useState<boolean>(false);
     const [completedCount, setCompletedCount] = useState<number>(0);
-    const [timeLeft, setTimeLeft] = useState<number>(300); 
+    const [timeLeft, setTimeLeft] = useState<number>(300);
     const [isSubmitPopupOpen, setIsSubmitPopupOpen] = useState<boolean>(false);
-    const navigate = useNavigate();
 
     // Đếm ngược thời gian
     useEffect(() => {
-        let timer: number; 
+        let timer: number;
         if (showQuestions && timeLeft > 0) {
             timer = window.setInterval(() => {
                 setTimeLeft((prev) => prev - 1);
@@ -40,7 +39,7 @@ const StudentDashboard: React.FC = () => {
 
     const handleSubjectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedSubject(e.target.value);
-        setIsPopupOpen(true); 
+        setIsPopupOpen(true);
     };
 
     const handlePopupClose = () => {
@@ -75,17 +74,17 @@ const StudentDashboard: React.FC = () => {
     const handleOpenSubmitPopup = () => {
         setIsSubmitPopupOpen(true);
     };
-    
+
     const handleSubmitConfirm = () => {
         setIsSubmitPopupOpen(false); // Đóng popup
-        setShowQuestions(false);     
+        setShowQuestions(false);
         setSelectedSubject("");      // Reset môn thi đã chọn
         setQuestions([]);            // Xóa dữ liệu câu hỏi
         setCompletedCount(0);        // Reset số câu hoàn thành
         setTimeLeft(300);            // Reset thời gian 
-    
+
     };
-    
+
     return (
         <div className="flex flex-col min-h-screen bg-bgPrimary">
             <SubHeader
@@ -94,7 +93,9 @@ const StudentDashboard: React.FC = () => {
                 userName={user?.fullName || "null"}
             />
 
-            {!showQuestions ? (
+            {currentSection === "process" ? (
+                <ProcessLessonForm />
+            ) : !showQuestions ? (
                 <>
                     <div className="flex justify-center my-8">
                         <div className="flex items-center bg-white shadow-md rounded-md px-2 w-full md:w-[900px]">
