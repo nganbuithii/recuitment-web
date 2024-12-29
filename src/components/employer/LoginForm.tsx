@@ -29,30 +29,85 @@ const LoginForm: React.FC = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    // const handleLogin = async () => {
+    //     setError(null);
+    //     const recaptchaValue = recaptchaRef.current.getValue();
+    //     if (!recaptchaValue) return setError("Vui lòng xác nhận reCAPTCHA.");
+
+    //     try {
+    //         setLoading(true);
+    //         const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+    //         const user = userCredential.user;
+
+    //         if (user.email) {
+    //             const q = query(collection(db, "students"), where("email", "==", user.email));
+    //             const querySnapshot = await getDocs(q);
+
+    //             if (!querySnapshot.empty) {
+    //                 querySnapshot.forEach((doc) => {
+    //                     const userData = doc.data();
+
+    //                     if (userData.role !== formData.role) {
+    //                         setError("Sai tên đăng nhập hoặc mật khẩu.");
+    //                         return; 
+    //                     }
+
+    //                     if (userData && userData.email && userData.role) {
+    //                         dispatch(setUser({
+    //                             uid: user.uid,
+    //                             email: user.email as string,
+    //                             role: userData.role,
+    //                             displayName: userData.displayName,
+    //                             ...userData,
+    //                         }));
+
+    //                         if (userData.role === "STUDENT") {
+    //                             navigate("/student-dashboard");
+    //                         } else {
+    //                             navigate("/");
+    //                         }
+    //                     } else {
+    //                         setError("Thông tin người dùng không hợp lệ.");
+    //                     }
+    //                 });
+    //             } else {
+    //                 setError("Không tìm thấy người dùng với email này.");
+    //             }
+    //         } else {
+    //             setError("Email không hợp lệ.");
+    //         }
+
+    //     } catch (err) {
+    //         setError("Sai tên đăng nhập hoặc mật khẩu.");
+    //         console.error(err);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
     const handleLogin = async () => {
         setError(null);
         const recaptchaValue = recaptchaRef.current.getValue();
         if (!recaptchaValue) return setError("Vui lòng xác nhận reCAPTCHA.");
-    
+
         try {
             setLoading(true);
             const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
             const user = userCredential.user;
-    
+
             if (user.email) {
-                const q = query(collection(db, "students"), where("email", "==", user.email));
+                const collectionName = formData.role === "DOANH_NGHIEP" ? "businesses" : "students";
+
+                const q = formData.role === "DOANH_NGHIEP"
+                    ? query(collection(db, "businesses"), where("contactEmail", "==", user.email))
+                    : query(collection(db, "students"), where("email", "==", user.email));
+
                 const querySnapshot = await getDocs(q);
-    
+
                 if (!querySnapshot.empty) {
                     querySnapshot.forEach((doc) => {
                         const userData = doc.data();
-    
-                        if (userData.role !== formData.role) {
-                            setError("Sai tên đăng nhập hoặc mật khẩu.");
-                            return; 
-                        }
-    
-                        if (userData && userData.email && userData.role) {
+
+                        if (userData.role === formData.role) {
                             dispatch(setUser({
                                 uid: user.uid,
                                 email: user.email as string,
@@ -60,14 +115,14 @@ const LoginForm: React.FC = () => {
                                 displayName: userData.displayName,
                                 ...userData,
                             }));
-    
+
                             if (userData.role === "STUDENT") {
                                 navigate("/student-dashboard");
-                            } else {
-                                navigate("/");
+                            } else if (userData.role === "DOANH_NGHIEP") {
+                                navigate("/business");
                             }
                         } else {
-                            setError("Thông tin người dùng không hợp lệ.");
+                            setError("Sai tên đăng nhập hoặc mật khẩu.");
                         }
                     });
                 } else {
@@ -76,7 +131,7 @@ const LoginForm: React.FC = () => {
             } else {
                 setError("Email không hợp lệ.");
             }
-    
+
         } catch (err) {
             setError("Sai tên đăng nhập hoặc mật khẩu.");
             console.error(err);
@@ -84,8 +139,6 @@ const LoginForm: React.FC = () => {
             setLoading(false);
         }
     };
-    
-    
 
 
 
@@ -179,16 +232,16 @@ const LoginForm: React.FC = () => {
             </div>
 
             <Button
-    text={
-        loading ? (
-            <Loading />
-        ) : (
-            "Đăng nhập"
-        )
-    }
-    onClick={handleLogin}
-    disabled={loading}
-/>
+                text={
+                    loading ? (
+                        <Loading />
+                    ) : (
+                        "Đăng nhập"
+                    )
+                }
+                onClick={handleLogin}
+                disabled={loading}
+            />
         </div>
     );
 };

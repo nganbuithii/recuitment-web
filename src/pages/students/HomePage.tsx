@@ -4,11 +4,12 @@ import SearchBar from '../../components/common/SearchBar';
 import Footer from '../../components/common/Footer';
 import JobCard from '../../components/common/JobCard';
 import InfoRegisterForm from '../../components/students/InfoRegisterForm';
+import RegisterBusinessform from './RegisterBusinessform';
 
 const HomePage = () => {
-    const [currentSection, setCurrentSection] = useState<"jd" | "register">("jd");
+    const [currentSection, setCurrentSection] = useState<"jd" | "register" | "business">("jd");
 
-    const handleSectionChange = (section: "jd" | "register") => {
+    const handleSectionChange = (section: "jd" | "register" | "business") => {
         setCurrentSection(section);
     };
 
@@ -82,6 +83,11 @@ const HomePage = () => {
                 {currentSection === "register" && (
                     <div>
                         <InfoRegisterForm />
+                    </div>
+                )}
+                {currentSection === "business" && (
+                    <div>
+                        <RegisterBusinessform/>
                     </div>
                 )}
             </div>

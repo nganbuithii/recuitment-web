@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { NoteIcon, UserIcon } from "../common/Icons";
 interface HeaderProps {
-    onSelect: (section: "jd" | "register") => void;
+    onSelect: (section: "jd" | "register" | "business") => void;
 }
 const Header: React.FC<HeaderProps> = ({ onSelect }) => {
     const [menuOpen, setMenuOpen] = useState(false); // State để điều khiển menu toggle
-    const [selected, setSelected] = useState<"jd" | "register" | null>("jd");
+    const [selected, setSelected] = useState<"jd" | "register" | "business" | null>("jd");
 
     const handleJDClick = () => {
         setSelected(selected === "jd" ? null : "jd");
@@ -15,6 +15,10 @@ const Header: React.FC<HeaderProps> = ({ onSelect }) => {
     const handleRegisterClick = () => {
         setSelected(selected === "register" ? null : "register");
         onSelect("register"); 
+    };
+    const handleBusinessClick = () => {
+        setSelected(selected === "business" ? null : "business");
+        onSelect("business"); 
     };
 
     const toggleMenu = () => {
@@ -56,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ onSelect }) => {
                         } transition-all duration-300`}
                     >
                         <UserIcon color={selected === "jd" ? "#F26D21" : "#6D6D6D"} />
-                        <p className="text-sm sm:text-lg font-medium ">Xem JD yêu cầu tuyển dụng</p>
+                        <p className="text-sm sm:text-base font-medium ">Xem JD yêu cầu tuyển dụng</p>
                     </div>
                     {selected === "jd" && (
                         <div className="w-2 h-2 rounded-full bg-[#F26D21] mt-1 sm:block hidden absolute bottom-[-12px]"></div>
@@ -74,9 +78,25 @@ const Header: React.FC<HeaderProps> = ({ onSelect }) => {
                         } transition-all duration-300`}
                     >
                         <NoteIcon color={selected === "register" ? "#F26D21" : "#6D6D6D"} />
-                        <p className="text-sm sm:text-lg font-medium text-center">Đăng ký trực tuyến</p>
+                        <p className="text-sm sm:text-base font-medium text-center">Đăng ký trực tuyến</p>
                     </div>
                     {selected === "register" && (
+                        <div className="w-2 h-2 rounded-full bg-[#F26D21] mt-1 sm:block hidden absolute bottom-[-12px]"></div>
+                    )}
+                </div>
+                <div
+                    className="flex flex-col items-center cursor-pointer relative"
+                    onClick={handleBusinessClick}
+                >
+                    <div
+                        className={`flex items-center gap-2 ${
+                            selected === "business" ? "text-[#F26D21]" : "text-gray-400"
+                        } transition-all duration-300`}
+                    >
+                        <NoteIcon color={selected === "business" ? "#F26D21" : "#6D6D6D"} />
+                        <p className="text-sm sm:text-base font-medium text-center">Đăng ký doanh nghiệp</p>
+                    </div>
+                    {selected === "business" && (
                         <div className="w-2 h-2 rounded-full bg-[#F26D21] mt-1 sm:block hidden absolute bottom-[-12px]"></div>
                     )}
                 </div>

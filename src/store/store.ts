@@ -1,6 +1,7 @@
 // import { configureStore } from "@reduxjs/toolkit";
-// import studentsReducer from './studentsSlice'
-// import authReducer from './authSlide'
+import studentsReducer from './studentsSlice'
+import authReducer from './authSlide'
+import businessReducer from './businessSlice'
 
 // const store = configureStore({
 //     reducer: {
@@ -18,7 +19,13 @@ import blogReducer from '../recruitment.reducer'
 // import blogReducer from './blogSlide'
 
 const store = configureStore({
-    reducer: { blog: blogReducer }
+    reducer: {
+        blog: blogReducer,
+        students: studentsReducer,
+        auth: authReducer,
+        business:businessReducer
+    }
+
 })
 // lấy RooTState và AppDispatch từ store của chúng ta
 export type RootState = ReturnType<typeof store.getState>
