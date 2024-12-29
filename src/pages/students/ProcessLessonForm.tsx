@@ -9,13 +9,15 @@ import { SendIcon } from '../../components/common/Icons';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfig';
+import { ToastContainer, toast } from 'react-toastify'; // Import Toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS của Toastify
 
 const ProcessLessonForm: React.FC = () => {
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [linkFile, setLinkFile] = useState<string>('');
     const [reportContent, setReportContent] = useState<string>('');
     const user = useSelector((state: RootState) => state.auth.user);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,20 +29,31 @@ const ProcessLessonForm: React.FC = () => {
 
         try {
             await addDoc(collection(db, 'reports'), {
-                userId: user.uid,  
+                userId: user.uid,
                 selectedOption,
                 linkFile,
                 reportContent,
-                createdAt: Timestamp.fromDate(new Date()) 
+                createdAt: Timestamp.fromDate(new Date()),
             });
 
-            console.log("Dữ liệu đã được gửi thành công");
+            // Hiển thị toast thành công
+            toast.success('Gửi báo cáo thành công!', {
+                position: 'top-right',
+                autoClose: 3000, // Thời gian tự đóng (3 giây)
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: 'light',
+            });
+
+            // Reset form
             setSelectedOption('');
             setLinkFile('');
             setReportContent('');
-
         } catch (error) {
-            console.error("Lỗi khi gửi báo cáo:", error);
+            console.error('Lỗi khi gửi báo cáo:', error);
+            toast.error('Có lỗi xảy ra, vui lòng thử lại!');
         }
     };
 
@@ -58,7 +71,7 @@ const ProcessLessonForm: React.FC = () => {
                     <div>
                         <SelectField
                             label="Chọn lớp / Chọn nhóm thực tập"
-                            options={["Lớp 1 -Nhóm 1", "Lớp 2- Nhóm 2", "Lớp 3- Nhóm 3 "]}
+                            options={['Lớp 1 -Nhóm 1', 'Lớp 2- Nhóm 2', 'Lớp 3- Nhóm 3 ']}
                             value={selectedOption}
                             onChange={handleSubjectChange}
                             name="class"
@@ -89,14 +102,13 @@ const ProcessLessonForm: React.FC = () => {
                     />
 
                     <div className="text-left w-1/4">
-                        <Button
-                            text="Gửi" 
-                            icon={<SendIcon />} 
-                            type="submit" 
-                        />
+                        <Button text="Gửi" icon={<SendIcon />} type="submit" />
                     </div>
                 </form>
             </div>
+
+            {/* Toast Container để hiển thị toast */}
+            <ToastContainer />
         </div>
     );
 };

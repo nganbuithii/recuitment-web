@@ -6,6 +6,8 @@ import HomePage from "./pages/students/HomePage";
 import ErrorPage from "./pages/errorPage";
 import ResetPassPage from "./pages/employer/ResetPassPage";
 import StudentDashboard from "./pages/students/StudentDashboard";
+import BusinessLoggedLayout from "./layout/BusinessManageLayout/BusinessManageLayout";
+import BusinessDashboard from "./pages/BusinessDashboard";
 
 const router = createBrowserRouter([
     {
@@ -34,5 +36,13 @@ const router = createBrowserRouter([
         element: <StudentDashboard />,
         errorElement: <ErrorPage />,
     },
+    {
+        path: '/business',
+        element: (
+            <BusinessLoggedLayout>
+                <BusinessDashboard />
+            </BusinessLoggedLayout>
+        )
+    }
 ]);
 export default router;
