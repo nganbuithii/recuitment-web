@@ -115,4 +115,36 @@ export const LogoutIcon = ({ className }: { className?: string }) => (
         <path d="M19 18.6665L23.6667 13.9998M23.6667 13.9998L19 9.33317M23.6667 13.9998H12M14.3333 4.6665H8.73333C7.42654 4.6665 6.77315 4.6665 6.27402 4.92082C5.83498 5.14453 5.47802 5.50148 5.25432 5.94053C5 6.43965 5 7.09305 5 8.39984V19.5998C5 20.9066 5 21.56 5.25432 22.0591C5.47802 22.4982 5.83498 22.8551 6.27402 23.0789C6.77315 23.3332 7.42654 23.3332 8.73333 23.3332H14.3333" stroke="#F26E21" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
+export const UpIcon = ({ className }: { className?: string }) => (
+    <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        viewBox='0 0 24 24'
+        strokeWidth={1.5}
+        stroke='currentColor'
+        className='w-[20px] h-[20px]'
+    >
+        <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            d='M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5'
+        />
+    </svg>
+);
+export const DownIcon = ({ className }: { className?: string }) => (
+    <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        viewBox='0 0 24 24'
+        strokeWidth={1.5}
+        stroke='currentColor'
+        className='w-[20px] h-[20px]'
+    >
+        <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            d='M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3'
+        />
+    </svg>
+);
 
