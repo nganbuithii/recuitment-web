@@ -1,21 +1,29 @@
-import React from "react";
-import { IoSearchSharp, IoChevronDownSharp } from "react-icons/io5";
-import { DropIcon, FilterIcon } from "./Icons";
+import React, { useState } from 'react';
+import { IoSearchSharp } from "react-icons/io5";
+import { DropIcon } from "./Icons";
 
-const SearchBar = () => {
+interface SearchBarProps {
+    companies: string[];
+    onCompanySelect: (company: string) => void;
+    searchTerm: string;
+    onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SearchBar = ({ companies, onCompanySelect, searchTerm, onSearchChange }: SearchBarProps) => {
     return (
         <div className="flex items-center justify-center bg-gray-100 py-6 mt-4">
             <div className="flex bg-white rounded-lg shadow-md w-full max-w-full">
-                {/* Ô nhập liệu */}
+                {/* Ô nhập liệu tìm kiếm công việc */}
                 <div className="flex w-full items-center flex-1 px-4 sm:border-r border-gray-300 rounded-l-full">
                     <IoSearchSharp color="orange" size={20} />
                     <input
                         type="text"
-                        placeholder="Nhập vị trí muốn ứng tuyển"
+                        placeholder="Tìm kiếm công việc"
+                        value={searchTerm}
+                        onChange={onSearchChange}
                         className="py-3 w-full pl-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none rounded-l-full"
                     />
                 </div>
-
                 {/* Dropdown lĩnh vực chuyên môn */}
                 <div className="hidden sm:flex items-center px-4 border-r border-gray-300 relative">
                     <select
@@ -28,15 +36,15 @@ const SearchBar = () => {
                     </select>
                     <DropIcon className="absolute right-2 text-orange-500 pointer-events-none" />
                 </div>
-
-                {/* Dropdown chọn công ty */}
                 <div className="hidden sm:flex items-center px-4 border-r border-gray-300 relative">
                     <select
                         className="appearance-none text-base text-gray-700 focus:outline-none bg-white pr-8"
+                        onChange={(e) => onCompanySelect(e.target.value)}
                     >
                         <option value="">Chọn công ty</option>
-                        <option value="company-a">Công ty A</option>
-                        <option value="company-b">Công ty B</option>
+                        {companies.map((company, index) => (
+                            <option key={index} value={company}>{company}</option>
+                        ))}
                     </select>
                     <DropIcon className="absolute right-2 text-orange-500 pointer-events-none" />
                 </div>
@@ -47,12 +55,6 @@ const SearchBar = () => {
                     Tìm việc
                 </button>
             </div>
-
-            {/* Nút Lọc cho thiết bị nhỏ */}
-            <button className="ml-3 sm:hidden flex items-center px-4 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none">
-                Lọc
-                <FilterIcon />
-            </button>
         </div>
     );
 };

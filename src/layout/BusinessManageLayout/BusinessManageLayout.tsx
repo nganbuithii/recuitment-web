@@ -6,12 +6,21 @@ import Header from "../../components/employer/header"
 import Footer from "../../components/common/Footer";
 import { LogoutIcon } from "../../components/common/Icons";
 import { CaretDownOutlined } from '@ant-design/icons';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearUser } from "../../store/authSlide";
 
 
 interface BusinessLoggedProps {
   children: React.ReactNode
 }
 export default function BusinessLoggedLayout({ children }: BusinessLoggedProps) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(clearUser());
+    navigate("/login");
+  };
   return (
     <div className='flex flex-col h-screen mx-auto'>
       <header className="bg-transparent sm:h-[102px] py-2 px-6 pt-5">
@@ -37,7 +46,7 @@ export default function BusinessLoggedLayout({ children }: BusinessLoggedProps) 
               <span className="mr-1">VIE</span>
               <CaretDownOutlined />
             </button>
-            <button className="text-orange-600">
+            <button className="text-orange-600" onClick={handleLogout}>
               <LogoutIcon />
             </button>
           </div>

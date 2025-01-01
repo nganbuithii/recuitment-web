@@ -7,11 +7,13 @@ import { RootState } from "../store/store";
 import { Button, notification, Pagination } from "antd";
 import DeleteJobModal from "../components/Modals/DeleteJobModal";
 import JobPostModal from "../components/Modals/JobPostModal";
+import { DownIcon, UpIcon } from "../components/common/Icons";
 
 interface JobPost {
     NamePost: string;
     Location: string;
     id?: string;
+    userId?: string;
 }
 
 const postsPerPage = 5;
@@ -38,15 +40,19 @@ export default function BusinessDashboard() {
         setNewJob({ NamePost: '', Location: '' });
         setIsModalOpen(false);
     };
+    const fetchPosts = async () => {
+        const querySnapshot = await getDocs(collection(db, "posts"));
+        const postsList: JobPost[] = querySnapshot.docs
+            .map((doc) => ({ id: doc.id, ...doc.data() }) as JobPost)
+            .filter((post) => post.userId === user?.uid); // Lọc theo userId
 
+        setPosts(postsList);
+    };
     useEffect(() => {
-        const fetchPosts = async () => {
-            const querySnapshot = await getDocs(collection(db, "posts"));
-            const postsList: JobPost[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as JobPost);
-            setPosts(postsList);
-        };
+       
         fetchPosts();
-    }, []);
+    }, [user]); 
+
 
     const openDeleteModal = (jobId: string) => {
         setJobToDelete(jobId);
@@ -101,9 +107,11 @@ export default function BusinessDashboard() {
 
             closeModal();
 
-            const querySnapshot = await getDocs(collection(db, "posts"));
-            const postsList: JobPost[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as JobPost);
-            setPosts(postsList);
+            // const querySnapshot = await getDocs(collection(db, "posts"));
+            // const postsList: JobPost[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as JobPost);
+            // setPosts(postsList);
+            fetchPosts();
+            
 
         } catch (e) {
             console.error("Error saving document: ", e);
@@ -126,9 +134,10 @@ export default function BusinessDashboard() {
                 description: 'Vị trí tuyển dụng đã được xóa.',
             });
 
-            const querySnapshot = await getDocs(collection(db, "posts"));
-            const postsList: JobPost[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as JobPost);
-            setPosts(postsList);
+            // const querySnapshot = await getDocs(collection(db, "posts"));
+            // const postsList: JobPost[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as JobPost);
+            // setPosts(postsList);
+            fetchPosts()
         } catch (e) {
             console.error("Error deleting document: ", e);
             notification.error({
@@ -147,6 +156,7 @@ export default function BusinessDashboard() {
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
+console.log("USER DOANH NGHIEP", user)
 
     return (
         <div className="bg-gray-100">
@@ -172,62 +182,75 @@ export default function BusinessDashboard() {
                     closeDeleteModal={closeDeleteModal}
                     handleDeleteJob={handleDeleteJob}
                 />
-
-                <div className="relative overflow-x-auto mt-5">
-                    <div className="p-4">
-                        <div className="rounded-lg border">
-                            <table className="w-full border-collapse border-spacing-y-4 text-center">
-                                <thead>
-                                    <tr className="bg-orange-200 text-[#f26d21]">
-                                        <th className="px-4 py-2">ID</th>
-                                        <th className="px-4 py-2">Lĩnh vực tuyển dụng</th>
-                                        <th className="px-4 py-2">Nơi làm việc</th>
-                                        <th className="px-4 py-2">Job Description</th>
-                                        <th className="px-4 py-2">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currentPosts.map((post, index) => (
-                                        <tr key={post.id}>
-                                            <td className="px-4 py-2">{index + 1}</td>
-                                            <td className="px-4 py-2">{post.NamePost}</td>
-                                            <td className="px-4 py-2">{post.Location}</td>
-                                            <td className="px-4 py-2">
-                                                <div className="flex items-center justify-center gap-2 text-[#f26d21]">
-                                                    {/* Placeholder for icons */}
-                                                </div>
-                                            </td>
-                                            <td className="px-4 py-2">
-                                                <button
-                                                    className="bg-transparent text-white px-4 py-2"
-                                                    onClick={() => openModal(post)}
-                                                >
-                                                    <EditOutlined className="text-xl text-blue-500" />
-                                                </button>
-                                                <button
-                                                    className="bg-transparent text-white px-4 py-2"
-                                                    onClick={() => openDeleteModal(post.id!)}
-                                                >
-                                                    <DeleteOutlined className="text-red-500 text-xl" />
-                                                </button>
-                                            </td>
+                
+                    <div className="relative overflow-x-auto mt-5">
+                        <div className="p-4">
+                            <div className="rounded-lg border">
+                                <table className="w-full border-collapse border-spacing-y-4 text-center">
+                                    <thead>
+                                        <tr className="bg-orange-200 text-[#f26d21]">
+                                            <th className="px-4 py-2">ID</th>
+                                            <th className="px-4 py-2">Lĩnh vực tuyển dụng</th>
+                                            <th className="px-4 py-2">Nơi làm việc</th>
+                                            <th className="px-4 py-2">Job Description</th>
+                                            <th className="px-4 py-2">Hành động</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+    {currentPosts.length === 0 ? (
+        <tr>
+            <td colSpan={5} className="px-4 py-2 text-center text-gray-500">
+                Chưa có công việc nào được đăng
+            </td>
+        </tr>
+    ) : (
+        currentPosts.map((post, index) => (
+            <tr key={post.id}>
+                <td className="px-4 py-2">{index + 1}</td>
+                <td className="px-4 py-2">{post.NamePost}</td>
+                <td className="px-4 py-2">{post.Location}</td>
+                <td className="px-4 py-2">
+                    <div className="flex items-center justify-center gap-2 text-[#f26d21]">
+                        <UpIcon />
+                        <DownIcon />
+                    </div>
+                </td>
+                <td className="px-4 py-2">
+                    <button
+                        className="bg-transparent text-white px-4 py-2"
+                        onClick={() => openModal(post)}
+                    >
+                        <EditOutlined className="text-xl text-blue-500" />
+                    </button>
+                    <button
+                        className="bg-transparent text-white px-4 py-2"
+                        onClick={() => openDeleteModal(post.id!)}
+                    >
+                        <DeleteOutlined className="text-red-500 text-xl" />
+                    </button>
+                </td>
+            </tr>
+        ))
+    )}
+</tbody>
+
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+              
 
-                <Pagination
-                    align="center"
-                    current={currentPage}
-                    total={posts.length}
-                    pageSize={postsPerPage}
-                    onChange={handlePageChange}
-                    showSizeChanger={false}
-                    className="mt-5 text-center custom-pagination"
-                />
+                {posts.length > 0 && (
+                    <Pagination
+                        align="center"
+                        current={currentPage}
+                        total={posts.length}
+                        pageSize={postsPerPage}
+                        onChange={handlePageChange}
+                        showSizeChanger={false}
+                        className="mt-5 text-center custom-pagination"
+                    />
+                )}
             </div>
         </div>
     );
