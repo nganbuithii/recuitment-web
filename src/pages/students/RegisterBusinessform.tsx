@@ -10,45 +10,46 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../services/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 
-
 const RegisterBusinessForm = () => {
     const [form] = Form.useForm();
     const dispatch = useDispatch<AppDispatch>();
     const { loading, error } = useSelector((state: RootState) => state.business);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (values: any) => {
-    const processedValues = {
-        ...values,
-        managerPhone: values.managerPhone || "",
+        const processedValues = {
+            ...values,
+            managerPhone: values.managerPhone || "",
+        };
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                values.contactEmail,
+                values.password
+            );
+            const user = userCredential.user;
+
+            await setDoc(doc(db, "businesses", user.uid), {
+                ...processedValues,
+                role: "DOANH_NGHIEP",
+            });
+
+            notification.success({
+                message: "Thành công",
+                description: "Doanh nghiệp đã được đăng ký thành công!",
+            });
+
+            form.resetFields();
+            navigate("/login");
+        } catch (error) {
+            console.error(error);
+            notification.error({
+                message: "Lỗi",
+                description: "Đăng ký doanh nghiệp không thành công.",
+            });
+        }
     };
-
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, values.contactEmail, values.managerPhone);
-        const user = userCredential.user;
-
-        await setDoc(doc(db, "businesses", user.uid), {
-            ...processedValues,
-            role: "DOANH_NGHIEP", 
-        });
-
-        notification.success({
-            message: "Thành công",
-            description: "Doanh nghiệp đã được đăng ký thành công!",
-        });
-
-        form.resetFields();
-        navigate("/login");
-
-    } catch (error) {
-        console.error(error);
-        notification.error({
-            message: "Lỗi",
-            description: "Đăng ký doanh nghiệp không thành công.",
-        });
-    }
-};
-    
 
     return (
         <div className="bg-gray-50">
@@ -66,7 +67,15 @@ const RegisterBusinessForm = () => {
                         name="contactEmail"
                         rules={[{ required: true, message: "Vui lòng nhập email liên hệ!" }]}
                     >
-                        <Input className="py-2" placeholder="Nhập email liên hệ" />
+                        <Input className="py-2 border-none bg-white shadow-sm" placeholder="Nhập email liên hệ" />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Mật khẩu"
+                        name="password"
+                        rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
+                    >
+                        <Input.Password className="py-2 border-none bg-white shadow-sm" placeholder="Nhập mật khẩu" />
                     </Form.Item>
 
                     <Form.Item
@@ -74,7 +83,7 @@ const RegisterBusinessForm = () => {
                         name="companyAddress"
                         rules={[{ required: true, message: "Vui lòng nhập địa chỉ công ty!" }]}
                     >
-                        <Input className="py-2" placeholder="Nhập địa chỉ công ty" />
+                        <Input className="py-2 border-none bg-white shadow-sm" placeholder="Nhập địa chỉ công ty" />
                     </Form.Item>
 
                     <Form.Item
@@ -82,7 +91,7 @@ const RegisterBusinessForm = () => {
                         name="companyName"
                         rules={[{ required: true, message: "Vui lòng nhập tên doanh nghiệp!" }]}
                     >
-                        <Input className="py-2" placeholder="Nhập tên doanh nghiệp" />
+                        <Input className="py-2 border-none bg-white shadow-sm" placeholder="Nhập tên doanh nghiệp" />
                     </Form.Item>
 
                     <Form.Item
@@ -90,7 +99,7 @@ const RegisterBusinessForm = () => {
                         name="managerName"
                         rules={[{ required: true, message: "Vui lòng nhập tên người quản lý!" }]}
                     >
-                        <Input className="py-2" placeholder="Nhập tên người quản lý" />
+                        <Input className="py-2 border-none bg-white shadow-sm" placeholder="Nhập tên người quản lý" />
                     </Form.Item>
 
                     <Form.Item
@@ -98,14 +107,14 @@ const RegisterBusinessForm = () => {
                         name="companyPhone"
                         rules={[{ required: true, message: "Vui lòng nhập điện thoại công ty!" }]}
                     >
-                        <Input className="py-2" placeholder="Nhập điện thoại công ty" />
+                        <Input className="py-2 border-none bg-white shadow-sm" placeholder="Nhập điện thoại công ty" />
                     </Form.Item>
 
                     <Form.Item
                         label="Điện thoại người quản lý"
                         name="managerPhone"
                     >
-                        <Input className="py-2" placeholder="Nhập điện thoại người quản lý" />
+                        <Input className="py-2 border-none bg-white shadow-sm" placeholder="Nhập điện thoại người quản lý" />
                     </Form.Item>
 
                     <p className="col-span-2 text-sm text-gray-500">* là những trường thông tin bắt buộc</p>

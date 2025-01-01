@@ -99,15 +99,20 @@ export const DropIcon = ({ className }: { className?: string }) => (
 );
 export const ArrowIconLeft = ({ className }: { className?: string }) => (
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className={`${className}`}>
-<path d="M27 18L9 18M27 18L19.5 25.5M27 18L19.5 10.5" stroke="#F26D21" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
+        <path d="M27 18L9 18M27 18L19.5 25.5M27 18L19.5 10.5" stroke="#F26D21" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
 
 );
 export const AlertIcon = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#EC3740" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M12 16H12.01" stroke="#EC3740" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M12 8V12" stroke="#EC3740" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
+        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#EC3740" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 16H12.01" stroke="#EC3740" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 8V12" stroke="#EC3740" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+export const LogoutIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M19 18.6665L23.6667 13.9998M23.6667 13.9998L19 9.33317M23.6667 13.9998H12M14.3333 4.6665H8.73333C7.42654 4.6665 6.77315 4.6665 6.27402 4.92082C5.83498 5.14453 5.47802 5.50148 5.25432 5.94053C5 6.43965 5 7.09305 5 8.39984V19.5998C5 20.9066 5 21.56 5.25432 22.0591C5.47802 22.4982 5.83498 22.8551 6.27402 23.0789C6.77315 23.3332 7.42654 23.3332 8.73333 23.3332H14.3333" stroke="#F26E21" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
 );
 
