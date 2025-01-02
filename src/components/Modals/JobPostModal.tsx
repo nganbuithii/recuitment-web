@@ -1,10 +1,15 @@
-import React from "react";
-import { Modal, Form, Input, notification } from "antd";
+import React, { useEffect, useState } from "react";
+import { Modal, Form, Input, Select } from "antd";
+
+const { Option } = Select;
+
 interface JobPost {
     NamePost: string;
-    Location: string;
+    Location: string[]; 
     id?: string;
+    userId?: string;
 }
+
 interface JobPostModalProps {
     isModalOpen: boolean;
     closeModal: () => void;
@@ -22,6 +27,24 @@ const JobPostModal: React.FC<JobPostModalProps> = ({
     setNewJob,
     jobToEdit
 }) => {
+    const [provinces, setProvinces] = useState<string[]>([]);
+
+    // Gọi API để lấy danh sách tỉnh thành
+    useEffect(() => {
+        const fetchProvinces = async () => {
+            try {
+                const response = await fetch("https://provinces.open-api.vn/api/?depth=1");
+                const data = await response.json();
+                const provinceNames = data.map((province: { name: string }) => province.name);
+                setProvinces(provinceNames);
+            } catch (error) {
+                console.error("Error fetching provinces:", error);
+            }
+        };
+
+        fetchProvinces();
+    }, []);
+
     return (
         <Modal
             title={
@@ -32,7 +55,7 @@ const JobPostModal: React.FC<JobPostModalProps> = ({
             visible={isModalOpen}
             onOk={handleSaveJob}
             onCancel={closeModal}
-            footer={null} // Ẩn footer mặc định để custom nút
+            footer={null}
         >
             <Form layout="vertical">
                 <Form.Item label="Lĩnh vực ứng tuyển">
@@ -44,12 +67,19 @@ const JobPostModal: React.FC<JobPostModalProps> = ({
                     />
                 </Form.Item>
                 <Form.Item label="Nơi làm việc">
-                    <Input
+                    <Select
+                        mode="multiple"
+                        placeholder="Chọn nơi làm việc"
                         value={newJob.Location}
-                        onChange={(e) =>
-                            setNewJob((prev) => ({ ...prev, Location: e.target.value }))
-                        }
-                    />
+                        onChange={(value) => setNewJob((prev) => ({ ...prev, Location: value }))}
+                        style={{ width: "100%" }}
+                    >
+                        {provinces.map((province) => (
+                            <Option key={province} value={province}>
+                                {province}
+                            </Option>
+                        ))}
+                    </Select>
                 </Form.Item>
             </Form>
 

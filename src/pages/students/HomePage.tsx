@@ -7,8 +7,8 @@ import Footer from '../../components/common/Footer';
 import JobCard from '../../components/common/JobCard';
 import InfoRegisterForm from '../../components/students/InfoRegisterForm';
 import RegisterBusinessform from './RegisterBusinessform';
+import { Pagination } from 'antd';
 
-// Hàm loại bỏ dấu tiếng Việt
 const removeVietnameseTones = (str: string) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };
@@ -27,7 +27,9 @@ const HomePage = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
     const [companies, setCompanies] = useState<string[]>([]);
-    const [searchTerm, setSearchTerm] = useState<string>(''); 
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [pageSize] = useState<number>(5);
 
     const handleSectionChange = (section: "jd" | "register" | "business") => {
         setCurrentSection(section);
@@ -62,17 +64,23 @@ const HomePage = () => {
         } else {
             setFilteredPosts(posts);
         }
+        setCurrentPage(1); // Reset về trang đầu
     };
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
+        setCurrentPage(1);
     };
 
     const filteredResults = filteredPosts.filter(post => {
-        const normalizedSearchTerm = removeVietnameseTones(searchTerm.toLowerCase()); 
-        const normalizedJobName = removeVietnameseTones(post.NamePost.toLowerCase());  
+        const normalizedSearchTerm = removeVietnameseTones(searchTerm.toLowerCase());
+        const normalizedJobName = removeVietnameseTones(post.NamePost.toLowerCase());
         return normalizedJobName.includes(normalizedSearchTerm);
     });
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedResults = filteredResults.slice(startIndex, endIndex);
 
     return (
         <div className="max-h-screen-xl flex flex-col bg-white">
@@ -81,11 +89,11 @@ const HomePage = () => {
                 {currentSection === "jd" && (
                     <section className="bg-gray-100">
                         <div className="w-[343px] sm:w-[1290px] sm:h-[1080px] mx-auto">
-                            <SearchBar 
-                                companies={companies} 
-                                onCompanySelect={handleCompanySelect} 
-                                searchTerm={searchTerm} 
-                                onSearchChange={handleSearchChange} 
+                            <SearchBar
+                                companies={companies}
+                                onCompanySelect={handleCompanySelect}
+                                searchTerm={searchTerm}
+                                onSearchChange={handleSearchChange}
                             />
 
                             <div className="flex justify-center items-center w-full bg-gray-100 my-6">
@@ -97,8 +105,8 @@ const HomePage = () => {
                             </div>
 
                             <div className="flex w-full items-center content-center gap-4 flex-wrap">
-                                {filteredResults.length > 0 ? (
-                                    filteredResults.map((post) => (
+                                {paginatedResults.length > 0 ? (
+                                    paginatedResults.map((post) => (
                                         <JobCard
                                             key={post.id}
                                             title={post.NamePost}
@@ -112,6 +120,16 @@ const HomePage = () => {
                                     <div className="text-center w-full">Không có công việc nào để hiển thị.</div>
                                 )}
                             </div>
+
+                            <div className="flex justify-center mt-4">
+                                <Pagination
+                                    current={currentPage}
+                                    pageSize={pageSize} // Giữ nguyên kích thước trang mặc định
+                                    total={filteredResults.length}
+                                    onChange={(page) => setCurrentPage(page)} // Chỉ xử lý thay đổi trang
+                                />
+                            </div>
+
                         </div>
                     </section>
                 )}

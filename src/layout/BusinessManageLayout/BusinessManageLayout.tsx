@@ -1,8 +1,5 @@
-// import Footer from '~/Components/Footer'
-// import HeaderDNLogined from '~/Components/HeaderDNLogined'
+
 import React from "react";
-// import Footer from "../../components/common/Footer"
-import Header from "../../components/employer/header"
 import Footer from "../../components/common/Footer";
 import { LogoutIcon } from "../../components/common/Icons";
 import { CaretDownOutlined } from '@ant-design/icons';
